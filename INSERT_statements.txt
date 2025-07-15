@@ -1,334 +1,445 @@
+-- Alter Table Statements
 ALTER TABLE Supplier
-ALTER COLUMN S_City TYPE VARCHAR(20),
-ALTER COLUMN S_State TYPE VARCHAR(20);
+MODIFY COLUMN S_City VARCHAR(20),
+MODIFY COLUMN S_State VARCHAR(20);
 
 ALTER TABLE ProductInstance
-ALTER COLUMN Colour TYPE VARCHAR(20);
+MODIFY COLUMN Colour VARCHAR(20);
 
 ALTER TABLE Sales_Transaction
-ALTER COLUMN PaymentMethod TYPE VARCHAR(15),
-ALTER COLUMN TranstID TYPE VARCHAR(15);
+MODIFY COLUMN PaymentMethod VARCHAR(15),
+MODIFY COLUMN TranstID VARCHAR(15);
 
 ALTER TABLE ReturnedProducts
-ALTER COLUMN ReturnID TYPE VARCHAR(10),
-ALTER COLUMN Reason TYPE VARCHAR(15),
-ALTER COLUMN Status TYPE VARCHAR(15),
-ALTER COLUMN TranstID TYPE VARCHAR(15);
+MODIFY COLUMN ReturnID VARCHAR(10),
+MODIFY COLUMN Reason VARCHAR(15),
+MODIFY COLUMN Status VARCHAR(15),
+MODIFY COLUMN TranstID VARCHAR(15);
 
---Supplier 
-INSERT INTO Supplier VALUES ('SUP001', 'Samson', '98765001', 'samson@mail.com', 'Ahmedabad', 'Gujarat', 380001, TRUE);
-INSERT INTO Supplier VALUES ('SUP002', 'Maple', '98765002', 'maple@mail.com', 'Ahmedabad', 'Gujarat', 380002, TRUE);
-INSERT INTO Supplier VALUES ('SUP003', 'OneMax', '98765003', 'onemax@mail.com', 'Gandhinagar', 'Gujarat', 382013, TRUE);
-INSERT INTO Supplier VALUES ('SUP004', 'Viva', '98765004', 'viva@mail.com', 'Rajkot', 'Gujarat', 360001, TRUE);
-INSERT INTO Supplier VALUES ('SUP005', 'Realmi', '98765005', 'realmi@mail.com', 'Surat', 'Gujarat', 394006, TRUE);
-INSERT INTO Supplier VALUES ('SUP006', 'Oppax', '98765006', 'oppax@mail.com', 'Vadodara', 'Gujarat', 300018, TRUE);
-INSERT INTO Supplier VALUES ('SUP007', 'Dall', '98765007', 'dall@mail.com', 'Gandhinagar', 'Gujarat', 382022, TRUE);
-INSERT INTO Supplier VALUES ('SUP008', 'Hap', '98765008', 'hap@mail.com', 'Ahmedabad', 'Gujarat', 380008, TRUE);
-INSERT INTO Supplier VALUES ('SUP009', 'Lenva', '98765009', 'lenva@mail.com', 'Ahmedabad', 'Gujarat', 380009, TRUE);
-INSERT INTO Supplier VALUES ('SUP010', 'Miomi', '98765010', 'miomi@mail.com', 'Ahmedabad', 'Gujarat', 380010, TRUE);
-INSERT INTO Supplier VALUES ('SUP011', 'Sonique', '98765011', 'sonique@mail.com', 'Vadodara', 'Gujarat', 390012, TRUE);
-INSERT INTO Supplier VALUES ('SUP012', 'LJ', '98765012', 'lj@mail.com', 'Mumbai', 'Maharasthra', 400001, TRUE);
-INSERT INTO Supplier VALUES ('SUP013', 'Panason', '98765013', 'panason@mail.com', 'Ahmedabad', 'Gujarat', 380013, TRUE);
-INSERT INTO Supplier VALUES ('SUP014', 'Tosho', '98765014', 'tosho@mail.com', 'Indore', 'MP', 452001, TRUE);
-INSERT INTO Supplier VALUES ('SUP015', 'JBZ', '98765015', 'jbz@mail.com', 'Ahmedabad', 'Gujarat', 380015, TRUE);
-INSERT INTO Supplier VALUES ('SUP016', 'Boatz', '98765016', 'boatz@mail.com', 'Ahmedabad', 'Gujarat', 380016, TRUE);
-INSERT INTO Supplier VALUES ('SUP017', 'Noiz', '98765017', 'noiz@mail.com', 'Jaipur', 'Rajasthan', 302002, TRUE);
+-- Supplier
+INSERT INTO Supplier (SupplierID, S_Name, S_Contact, S_Email, S_City, S_State, S_Zip, S_isActive) 
+VALUES ('SUP001', 'Samson', '98765001', 'samson@mail.com', 'Ahmedabad', 'Gujarat', 380001, TRUE),
+       ('SUP002', 'Maple', '98765002', 'maple@mail.com', 'Ahmedabad', 'Gujarat', 380002, TRUE),
+       ('SUP003', 'OneMax', '98765003', 'onemax@mail.com', 'Gandhinagar', 'Gujarat', 382013, TRUE),
+       ('SUP004', 'Viva', '98765004', 'viva@mail.com', 'Rajkot', 'Gujarat', 360001, TRUE),
+       ('SUP005', 'Realmi', '98765005', 'realmi@mail.com', 'Surat', 'Gujarat', 394006, TRUE),
+       ('SUP006', 'Oppax', '98765006', 'oppax@mail.com', 'Vadodara', 'Gujarat', 300018, TRUE),
+       ('SUP007', 'Dall', '98765007', 'dall@mail.com', 'Gandhinagar', 'Gujarat', 382022, TRUE),
+       ('SUP008', 'Hap', '98765008', 'hap@mail.com', 'Ahmedabad', 'Gujarat', 380008, TRUE),
+       ('SUP009', 'Lenva', '98765009', 'lenva@mail.com', 'Ahmedabad', 'Gujarat', 380009, TRUE),
+       ('SUP010', 'Miomi', '98765010', 'miomi@mail.com', 'Ahmedabad', 'Gujarat', 380010, TRUE),
+       ('SUP011', 'Sonique', '98765011', 'sonique@mail.com', 'Vadodara', 'Gujarat', 390012, TRUE),
+       ('SUP012', 'LJ', '98765012', 'lj@mail.com', 'Mumbai', 'Maharasthra', 400001, TRUE),
+       ('SUP013', 'Panason', '98765013', 'panason@mail.com', 'Ahmedabad', 'Gujarat', 380013, TRUE),
+       ('SUP014', 'Tosho', '98765014', 'tosho@mail.com', 'Indore', 'MP', 452001, TRUE),
+       ('SUP015', 'JBZ', '98765015', 'jbz@mail.com', 'Ahmedabad', 'Gujarat', 380015, TRUE),
+       ('SUP016', 'Boatz', '98765016', 'boatz@mail.com', 'Ahmedabad', 'Gujarat', 380016, TRUE),
+       ('SUP017', 'Noiz', '98765017', 'noiz@mail.com', 'Jaipur', 'Rajasthan', 302002, TRUE);
 
-
---Product 
-INSERT INTO Product VALUES ('MOB-MAP-MP15', 'MPhone 15', 'Mobile', 65000, 79900, 15, 5, TRUE, 'SUP002');
-INSERT INTO Product VALUES ('MOB-MAP-MP14', 'MPhone 14', 'Mobile', 55000, 69900, 12, 5, TRUE, 'SUP002');
-INSERT INTO Product VALUES ('MOB-MAP-MPSE', 'MPhone SE', 'Mobile', 35000, 42900, 8, 3, TRUE, 'SUP002');
-INSERT INTO Product VALUES ('MOB-SAM-S23', 'Galaxy S23', 'Mobile', 60000, 74900, 18, 5, TRUE, 'SUP001');
-INSERT INTO Product VALUES ('MOB-SAM-A54', 'Galaxy A54', 'Mobile', 25000, 32900, 20, 5, TRUE, 'SUP001');
-INSERT INTO Product VALUES ('MOB-1MX-11R', 'OneMax 11R', 'Mobile', 35000, 39900, 15, 5, TRUE, 'SUP003');
-INSERT INTO Product VALUES ('MOB-1MX-13S', 'OneMax 13S', 'Mobile', 42000, 45500, 15, 5, TRUE, 'SUP003') ;
-INSERT INTO Product VALUES ('MOB-VIV-V27', 'Viva V27', 'Mobile', 28000, 34900, 12, 4, TRUE, 'SUP004');
-INSERT INTO Product VALUES ('MOB-VIV-T30', 'Viva T30', 'Mobile', 25000, 30500, 15, 5, TRUE, 'SUP004');
-INSERT INTO Product VALUES ('LAP-DAL-XPS13', 'XPS 13', 'Laptop', 80000, 99900, 10, 3, TRUE, 'SUP007');
-INSERT INTO Product VALUES ('LAP-DAL-INSP15', 'Inspiron 15', 'Laptop', 45000, 54900, 8, 3, TRUE, 'SUP007');
-INSERT INTO Product VALUES ('LAP-HP-15DW100', 'Pavillion 15', 'Laptop', 50000, 62900, 12, 4, TRUE, 'SUP008');
-INSERT INTO Product VALUES ('LAP-MAP-MBAM2', 'MapBook Air M2', 'Laptop', 85000, 104900, 7, 2, TRUE, 'SUP002');
-INSERT INTO Product VALUES ('LAP-MAP-MBAM4', 'MapBook Air M4', 'Laptop', 85000, 104900, 7, 2, TRUE, 'SUP002');
-INSERT INTO Product VALUES ('LAP-LNV-IDEAP3', 'IdeaPad 3', 'Laptop', 40000, 47900, 9, 3, TRUE, 'SUP009');
-INSERT INTO Product VALUES ('TV-SAM-QN90C', 'Neo QLED 90C', 'TV', 120000, 149900, 5, 2, TRUE, 'SUP001');
-INSERT INTO Product VALUES ('TV-SAM-CU7000', 'Crystal UHD', 'TV', 45000, 59900, 8, 3, TRUE, 'SUP001'); 
-INSERT INTO Product VALUES ('TV-SNQ-X80K', 'Bravia X80K', 'TV', 75000, 89900, 6, 2, TRUE, 'SUP011');
-INSERT INTO Product VALUES ('TV-LJ-C2', 'LJ OLED C2', 'TV', 110000, 139900, 4, 2, TRUE, 'SUP012'); 
-INSERT INTO Product VALUES ('TV-MIO-P1', 'Mi TV P1', 'TV', 35000, 42900, 10, 3, TRUE, 'SUP010');
-INSERT INTO Product VALUES ('TV-TOS-C350', ' Tosho C350', 'TV', 40000, 49900, 6, 2, TRUE, 'SUP014');
-INSERT INTO Product VALUES ('TAB-MAP-IPAD9', 'MPad 9th Gen', 'Tablet', 28000, 34900, 8, 3, TRUE, 'SUP002');
-INSERT INTO Product VALUES ('TAB-SAM-TABA8', 'Galaxy Tab A8', 'Tablet', 18000, 22900, 10, 3, TRUE, 'SUP001');
-INSERT INTO Product VALUES ('TAB-MIO-PAD6', 'Mi Pad 6', 'Tablet', 25000, 29900, 7, 2, TRUE, 'SUP010'); 
-INSERT INTO Product VALUES ('HPH-SNQ-WH1000', 'Sonique WH-1000XM5', 'Headphone', 25000, 29900, 12, 4, TRUE, 'SUP011');
-INSERT INTO Product VALUES ('HPH-JBZ-T660', 'Tune 660NC', 'Headphone', 6000, 7990, 15, 5, TRUE, 'SUP015');
-INSERT INTO Product VALUES ('HPH-BTZ-ROKER', 'Rockerz 550', 'Headphone', 2000, 2990, 20, 5, TRUE, 'SUP016');
-INSERT INTO Product VALUES ('HPH-NOZ-CANVAS', 'Canvas 02', 'Headphone', 1500, 1990, 18, 5, TRUE, 'SUP017');
-INSERT INTO Product VALUES ('HPH-MAP-AIRP3', 'AirPods 3', 'Headphone', 15000, 17900, 15, 5, TRUE, 'SUP002');
+-- Product
+INSERT INTO Product (ProductID, P_Name, Category, CostPrice, SellingPrice, StockQuantity, MinStock, P_isActive, SupplierID)
+VALUES ('MOB-MAP-MP15', 'MPhone 15', 'Mobile', 65000, 79900, 15, 5, TRUE, 'SUP002'),
+       ('MOB-MAP-MP14', 'MPhone 14', 'Mobile', 55000, 69900, 12, 5, TRUE, 'SUP002'),
+       ('MOB-MAP-MPSE', 'MPhone SE', 'Mobile', 35000, 42900, 8, 3, TRUE, 'SUP002'),
+       ('MOB-SAM-S23', 'Galaxy S23', 'Mobile', 60000, 74900, 18, 5, TRUE, 'SUP001'),
+       ('MOB-SAM-A54', 'Galaxy A54', 'Mobile', 25000, 32900, 20, 5, TRUE, 'SUP001'),
+       ('MOB-1MX-11R', 'OneMax 11R', 'Mobile', 35000, 39900, 15, 5, TRUE, 'SUP003'),
+       ('MOB-1MX-13S', 'OneMax 13S', 'Mobile', 42000, 45500, 15, 5, TRUE, 'SUP003'),
+       ('MOB-VIV-V27', 'Viva V27', 'Mobile', 28000, 34900, 12, 4, TRUE, 'SUP004'),
+       ('MOB-VIV-T30', 'Viva T30', 'Mobile', 25000, 30500, 15, 5, TRUE, 'SUP004'),
+       ('LAP-DAL-XPS13', 'XPS 13', 'Laptop', 80000, 99900, 10, 3, TRUE, 'SUP007'),
+       ('LAP-DAL-INSP15', 'Inspiron 15', 'Laptop', 45000, 54900, 8, 3, TRUE, 'SUP007'),
+       ('LAP-HP-15DW100', 'Pavillion 15', 'Laptop', 50000, 62900, 12, 4, TRUE, 'SUP008'),
+       ('LAP-MAP-MBAM2', 'MapBook Air M2', 'Laptop', 85000, 104900, 7, 2, TRUE, 'SUP002'),
+       ('LAP-MAP-MBAM4', 'MapBook Air M4', 'Laptop', 85000, 104900, 7, 2, TRUE, 'SUP002'),
+       ('LAP-LNV-IDEAP3', 'IdeaPad 3', 'Laptop', 40000, 47900, 9, 3, TRUE, 'SUP009'),
+       ('TV-SAM-QN90C', 'Neo QLED 90C', 'TV', 120000, 149900, 5, 2, TRUE, 'SUP001'),
+       ('TV-SAM-CU7000', 'Crystal UHD', 'TV', 45000, 59900, 8, 3, TRUE, 'SUP001'),
+       ('TV-SNQ-X80K', 'Bravia X80K', 'TV', 75000, 89900, 6, 2, TRUE, 'SUP011'),
+       ('TV-LJ-C2', 'LJ OLED C2', 'TV', 110000, 139900, 4, 2, TRUE, 'SUP012'),
+       ('TV-MIO-P1', 'Mi TV P1', 'TV', 35000, 42900, 10, 3, TRUE, 'SUP010'),
+       ('TV-TOS-C350', 'Tosho C350', 'TV', 40000, 49900, 6, 2, TRUE, 'SUP014'),
+       ('TAB-MAP-IPAD9', 'MPad 9th Gen', 'Tablet', 28000, 34900, 8, 3, TRUE, 'SUP002'),
+       ('TAB-SAM-TABA8', 'Galaxy Tab A8', 'Tablet', 18000, 22900, 10, 3, TRUE, 'SUP001'),
+       ('TAB-MIO-PAD6', 'Mi Pad 6', 'Tablet', 25000, 29900, 7, 2, TRUE, 'SUP010'),
+       ('HPH-SNQ-WH1000', 'Sonique WH-1000XM5', 'Headphone', 25000, 29900, 12, 4, TRUE, 'SUP011'),
+       ('HPH-JBZ-T660', 'Tune 660NC', 'Headphone', 6000, 7990, 15, 5, TRUE, 'SUP015'),
+       ('HPH-BTZ-ROKER', 'Rockerz 550', 'Headphone', 2000, 2990, 20, 5, TRUE, 'SUP016'),
+       ('HPH-NOZ-CANVAS', 'Canvas 02', 'Headphone', 1500, 1990, 18, 5, TRUE, 'SUP017'),
+       ('HPH-MAP-AIRP3', 'AirPods 3', 'Headphone', 15000, 17900, 15, 5, TRUE, 'SUP002');
 
 -- Storage Locations
-INSERT INTO Storage_Location VALUES ('LOC-A1-S1', 1, 1);
-INSERT INTO Storage_Location VALUES ('LOC-A1-S2', 1, 2);
-INSERT INTO Storage_Location VALUES ('LOC-A2-S1', 2, 1);
-INSERT INTO Storage_Location VALUES ('LOC-A2-S2', 2, 2);
-INSERT INTO Storage_Location VALUES ('LOC-A3-S1', 3, 1);
-INSERT INTO Storage_Location VALUES ('LOC-A3-S2', 3, 2);
-INSERT INTO Storage_Location VALUES ('LOC-A4-S1', 4, 1);
-INSERT INTO Storage_Location VALUES ('LOC-A4-S2', 4, 2);
-INSERT INTO Storage_Location VALUES ('LOC-A5-S1', 5, 1);
-INSERT INTO Storage_Location VALUES ('LOC-A5-S2', 5, 2);
-INSERT INTO Storage_Location VALUES ('LOC-A6-S1', 6, 1);
-INSERT INTO Storage_Location VALUES ('LOC-A6-S2', 6, 2);
-
+INSERT INTO Storage_Location (LocationID, Aisle, Shelf)
+VALUES ('LOC-A1-S1', 1, 1),
+       ('LOC-A1-S2', 1, 2),
+       ('LOC-A2-S1', 2, 1),
+       ('LOC-A2-S2', 2, 2),
+       ('LOC-A3-S1', 3, 1),
+       ('LOC-A3-S2', 3, 2),
+       ('LOC-A4-S1', 4, 1),
+       ('LOC-A4-S2', 4, 2),
+       ('LOC-A5-S1', 5, 1),
+       ('LOC-A5-S2', 5, 2),
+       ('LOC-A6-S1', 6, 1),
+       ('LOC-A6-S2', 6, 2);
 
 -- ProductInstances
-INSERT INTO ProductInstance VALUES ('INS-MOBMAPMP15-0001', 'MOB-MAP-MP15', 'Black', 'LOC-A1-S1');
-INSERT INTO ProductInstance VALUES ('INS-MOBMAPMP15-0002', 'MOB-MAP-MP15', 'White', 'LOC-A1-S2');
-INSERT INTO ProductInstance VALUES ('INS-MOBMAPMP14-0001', 'MOB-MAP-MP14', 'Blue', 'LOC-A1-S1');
-INSERT INTO ProductInstance VALUES ('INS-MOBMAPMPSE-0001', 'MOB-MAP-MPSE', 'Red', 'LOC-A1-S1');
-INSERT INTO ProductInstance VALUES ('INS-MOBSAMS23-0001', 'MOB-SAM-S23', 'Phantom Black', 'LOC-A2-S1');
-INSERT INTO ProductInstance VALUES ('INS-MOBSAMA54-0001', 'MOB-SAM-A54', 'Awesome Black', 'LOC-A2-S2');
-INSERT INTO ProductInstance VALUES ('INS-MOBSAMA54-0003', 'MOB-SAM-A54', 'Awesome Violet', 'LOC-A2-S2');
-INSERT INTO ProductInstance VALUES ('INS-MOB1MX11R-0001', 'MOB-1MX-11R', 'Sonic Black', 'LOC-A3-S1');
-INSERT INTO ProductInstance VALUES ('INS-MOB1MX13S-0001', 'MOB-1MX-13S', 'Emerald Green', 'LOC-A3-S2');
-INSERT INTO ProductInstance VALUES ('INS-MOBVIVV27-0001', 'MOB-VIV-V27', 'Magic Blue', 'LOC-A4-S1');
-INSERT INTO ProductInstance VALUES ('INS-MOBVIVT30-0001', 'MOB-VIV-T30', 'Starlight', 'LOC-A4-S2');
-INSERT INTO ProductInstance VALUES ('INS-LAPDALXPS-0001', 'LAP-DAL-XPS13', 'Platinum', 'LOC-A5-S1');
-INSERT INTO ProductInstance VALUES ('INS-LAPHP15DW-0001', 'LAP-HP-15DW100', 'Natural Silver', 'LOC-A5-S1');
-INSERT INTO ProductInstance VALUES ('INS-LAPMAPMBM-0001', 'LAP-MAP-MBAM2', 'Space Gray', 'LOC-A5-S2');
-INSERT INTO ProductInstance VALUES ('INS-LAPLNVID-0001', 'LAP-LNV-IDEAP3', 'Arctic Grey', 'LOC-A5-S2');
-INSERT INTO ProductInstance VALUES ('INS-TVSAMQN9-0001', 'TV-SAM-QN90C', 'Black', 'LOC-A5-S1');
-INSERT INTO ProductInstance VALUES ('INS-TVSNQX80-0001', 'TV-SNQ-X80K', 'Black', 'LOC-A5-S2');
-INSERT INTO ProductInstance VALUES ('INS-TVLJC2-0001', 'TV-LJ-C2', 'Dark Silver', 'LOC-A6-S1');
-INSERT INTO ProductInstance VALUES ('INS-TVMTOP1-0001', 'TV-MIO-P1', 'Black', 'LOC-A6-S1');
-INSERT INTO ProductInstance VALUES ('INS-TVTOSC3-0001', 'TV-TOS-C350', 'Black', 'LOC-A5-S2');
-INSERT INTO ProductInstance VALUES ('INS-TABMAPMP-0001', 'TAB-MAP-IPAD9', 'Space Gray', 'LOC-A2-S2');
-INSERT INTO ProductInstance VALUES ('INS-TABSAMTA-0001', 'TAB-SAM-TABA8', 'Silver', 'LOC-A3-S1');
-INSERT INTO ProductInstance VALUES ('INS-TABMIOPA-0001', 'TAB-MIO-PAD6', 'Graphite Gray', 'LOC-A3-S2');
-INSERT INTO ProductInstance VALUES ('INS-HPHSONWH-0001', 'HPH-SNQ-WH1000', 'Black', 'LOC-A4-S1');
-INSERT INTO ProductInstance VALUES ('INS-HPHJBZT6-0001', 'HPH-JBZ-T660', 'Blue', 'LOC-A4-S2');
-INSERT INTO ProductInstance VALUES ('INS-HPHBTZRO-0001', 'HPH-BTZ-ROKER', 'Black', 'LOC-A1-S1');
-INSERT INTO ProductInstance VALUES ('INS-HPHNOZCA-0001', 'HPH-NOZ-CANVAS', 'Black', 'LOC-A1-S2');
-INSERT INTO ProductInstance VALUES ('INS-HPHMAPA3-0001', 'HPH-MAP-AIRP3', 'White', 'LOC-A2-S1');
+INSERT INTO ProductInstance (InstanceID, ProductID, Colour, LocationID)
+VALUES ('INS-MOBMAPMP15-0001', 'MOB-MAP-MP15', 'Black', 'LOC-A1-S1'),
+       ('INS-MOBMAPMP15-0002', 'MOB-MAP-MP15', 'White', 'LOC-A1-S2'),
+       ('INS-MOBMAPMP14-0001', 'MOB-MAP-MP14', 'Blue', 'LOC-A1-S1'),
+       ('INS-MOBMAPMPSE-0001', 'MOB-MAP-MPSE', 'Red', 'LOC-A1-S1'),
+       ('INS-MOBSAMS23-0001', 'MOB-SAM-S23', 'Phantom Black', 'LOC-A2-S1'),
+       ('INS-MOBSAMA54-0001', 'MOB-SAM-A54', 'Awesome Black', 'LOC-A2-S2'),
+       ('INS-MOBSAMA54-0003', 'MOB-SAM-A54', 'Awesome Violet', 'LOC-A2-S2'),
+       ('INS-MOB1MX11R-0001', 'MOB-1MX-11R', 'Sonic Black', 'LOC-A3-S1'),
+       ('INS-MOB1MX13S-0001', 'MOB-1MX-13S', 'Emerald Green', 'LOC-A3-S2'),
+       ('INS-MOBVIVV27-0001', 'MOB-VIV-V27', 'Magic Blue', 'LOC-A4-S1'),
+       ('INS-MOBVIVT30-0001', 'MOB-VIV-T30', 'Starlight', 'LOC-A4-S2'),
+       ('INS-LAPDALXPS-0001', 'LAP-DAL-XPS13', 'Platinum', 'LOC-A5-S1'),
+       ('INS-LAPHP15DW-0001', 'LAP-HP-15DW100', 'Natural Silver', 'LOC-A5-S1'),
+       ('INS-LAPMAPMBM-0001', 'LAP-MAP-MBAM2', 'Space Gray', 'LOC-A5-S2'),
+       ('INS-LAPLNVID-0001', 'LAP-LNV-IDEAP3', 'Arctic Grey', 'LOC-A5-S2'),
+       ('INS-TVSAMQN9-0001', 'TV-SAM-QN90C', 'Black', 'LOC-A5-S1'),
+       ('INS-TVSNQX80-0001', 'TV-SNQ-X80K', 'Black', 'LOC-A5-S2'),
+       ('INS-TVLJC2-0001', 'TV-LJ-C2', 'Dark Silver', 'LOC-A6-S1'),
+       ('INS-TVMTOP1-0001', 'TV-MIO-P1', 'Black', 'LOC-A6-S1'),
+       ('INS-TVTOSC3-0001', 'TV-TOS-C350', 'Black', 'LOC-A5-S2'),
+       ('INS-TABMAPMP-0001', 'TAB-MAP-IPAD9', 'Space Gray', 'LOC-A2-S2'),
+       ('INS-TABSAMTA-0001', 'TAB-SAM-TABA8', 'Silver', 'LOC-A3-S1'),
+       ('INS-TABMIOPA-0001', 'TAB-MIO-PAD6', 'Graphite Gray', 'LOC-A3-S2'),
+       ('INS-HPHSONWH-0001', 'HPH-SNQ-WH1000', 'Black', 'LOC-A4-S1'),
+       ('INS-HPHJBZT6-0001', 'HPH-JBZ-T660', 'Blue', 'LOC-A4-S2'),
+       ('INS-HPHBTZRO-0001', 'HPH-BTZ-ROKER', 'Black', 'LOC-A1-S1'),
+       ('INS-HPHNOZCA-0001', 'HPH-NOZ-CANVAS', 'Black', 'LOC-A1-S2'),
+       ('INS-HPHMAPA3-0001', 'HPH-MAP-AIRP3', 'White', 'LOC-A2-S1');
 
--- Purchase_Order and ordered
-INSERT INTO Purchase_Order VALUES ('PO-MOBMAP1', '2024-10-15', '2024-10-22', '2024-10-21', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-MOBMAP1', 'MOB-MAP-MP15');
-INSERT INTO Purchase_Order VALUES ('PO-MOBMAP2', '2024-11-10', '2024-11-17', '2024-10-17', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-MOBMAP2', 'MOB-MAP-MP14');
-INSERT INTO Purchase_Order VALUES ('PO-MOBMAP3', '2023-10-15', '2023-10-22', '2023-10-21', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-MOBMAP3', 'MOB-MAP-MPSE');
-INSERT INTO Purchase_Order VALUES ('PO-MOBMAP4', '2025-01-10',  '2025-01-17', '2025-01-16', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-MOBMAP4', 'MOB-MAP-MP15');
-INSERT INTO Purchase_Order VALUES ('PO-MOBMAP5', '2025-02-8', '2025-02-15', '2025-01-16', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-MOBMAP5', 'MOB-MAP-MP14');
-INSERT INTO Purchase_Order VALUES ('PO-MOBMAP6', '2025-03-01', '2025-03-08', '2025-03-10', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-MOBMAP6', 'MOB-MAP-MPSE');
-INSERT INTO Purchase_Order VALUES ('PO-MOBSAM1', '2024-11-05', '2024-11-12', '2024-11-11', 'Completed', 'SUP001');
-INSERT INTO Ordered VALUES ('PO-MOBSAM1', 'MOB-SAM-S23');
-INSERT INTO Purchase_Order VALUES ('PO-MOBSAM2', '2024-11-05', '2024-11-12', '2024-11-11', 'Completed', 'SUP001');
-INSERT INTO Ordered VALUES ('PO-MOBSAM2', 'MOB-SAM-A54');
-INSERT INTO Purchase_Order VALUES ('PO-MOBSAM3', '2025-02-10', '2025-02-17', '2025-02-16', 'Completed', 'SUP001');
-INSERT INTO Ordered VALUES ('PO-MOBSAM3', 'MOB-SAM-S23');
-INSERT INTO Purchase_Order VALUES ('PO-MOBSAM4', '2025-02-09', '2025-02-16', '2025-02-18', 'Completed', 'SUP001');
-INSERT INTO Ordered VALUES ('PO-MOBSAM4', 'MOB-SAM-A54');
-INSERT INTO Purchase_Order VALUES ('PO-MOB1MX1', '2024-12-03', '2024-12-10', '2024-12-09', 'Completed', 'SUP003');
-INSERT INTO Ordered VALUES ('PO-MOB1MX1', 'MOB-1MX-11R');
-INSERT INTO Purchase_Order VALUES ('PO-MOB1MX2', '2024-12-11', '2024-12-18', '2024-12-18', 'Completed', 'SUP003');
-INSERT INTO Ordered VALUES ('PO-MOB1MX2', 'MOB-1MX-13S');
-INSERT INTO Purchase_Order VALUES ('PO-MOB1MX3', '2025-03-15', '2025-03-22', '2025-03-21', 'Completed', 'SUP003');
-INSERT INTO Ordered VALUES ('PO-MOB1MX3', 'MOB-1MX-11R');
-INSERT INTO Purchase_Order VALUES ('PO-MOB1MX4', '2025-03-15', '2025-03-22', '2025-03-21', 'Completed', 'SUP003');
-INSERT INTO Ordered VALUES ('PO-MOB1MX4', 'MOB-1MX-13S');
-INSERT INTO Purchase_Order VALUES ('PO-MOBVIV1', '2025-01-08', '2025-01-15', '2025-01-14', 'Completed', 'SUP004');
-INSERT INTO Ordered VALUES ('PO-MOBVIV1', 'MOB-VIV-V27');
-INSERT INTO Purchase_Order VALUES ('PO-MOBVIV2', '2025-01-08', '2025-02-15', '2025-02-14', 'Completed', 'SUP004');
-INSERT INTO Ordered VALUES ('PO-MOBVIV2', 'MOB-VIV-T30');
-INSERT INTO Purchase_Order VALUES ('PO-MOBVIV3', '2025-04-02', '2025-04-09', '2025-04-09', 'Completed', 'SUP004');
-INSERT INTO Ordered VALUES ('PO-MOBVIV3', 'MOB-VIV-V27');
-INSERT INTO Purchase_Order VALUES ('PO-MOBVIV4', '2025-04-05', '2025-04-12', '2025-04-11', 'Completed', 'SUP004');
-INSERT INTO Ordered VALUES ('PO-MOBVIV4', 'MOB-VIV-T30');
-INSERT INTO Purchase_Order VALUES ('PO-LAPDAL1', '2024-11-10', '2024-11-17', '2024-11-16', 'Completed', 'SUP007');
-INSERT INTO Ordered VALUES ('PO-LAPDAL1', 'LAP-DAL-XPS13');
-INSERT INTO Purchase_Order VALUES ('PO-LAPHP01', '2024-11-15', '2024-11-22', '2024-11-21', 'Completed', 'SUP008');
-INSERT INTO Ordered VALUES ('PO-LAPHP01', 'LAP-HP-15DW100');
-INSERT INTO Purchase_Order VALUES ('PO-LAPMAP1', '2024-11-20', '2024-11-27', '2024-11-26', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-LAPMAP1', 'LAP-MAP-MBAM2');
-INSERT INTO Purchase_Order VALUES ('PO-LAPLNV1', '2024-11-25', '2024-12-02', '2024-12-01', 'Completed', 'SUP009');
-INSERT INTO Ordered VALUES ('PO-LAPLNV1', 'LAP-LNV-IDEAP3');
-INSERT INTO Purchase_Order VALUES ('PO-TVSAM01', '2024-12-05', '2024-12-12', '2024-12-11', 'Completed', 'SUP001');
-INSERT INTO Ordered VALUES ('PO-TVSAM01', 'TV-SAM-QN90C');
-INSERT INTO Purchase_Order VALUES ('PO-TVSNQ01', '2024-12-10', '2024-12-17', '2024-12-16', 'Completed', 'SUP011');
-INSERT INTO Ordered VALUES ('PO-TVSNQ01', 'TV-SNQ-X80K');
-INSERT INTO Purchase_Order VALUES ('PO-TVLJ001', '2024-12-15', '2024-12-22', '2024-12-21', 'Completed', 'SUP012');
-INSERT INTO Ordered VALUES ('PO-TVLJ001', 'TV-LJ-C2');
-INSERT INTO Purchase_Order VALUES ('PO-TVMIO01', '2024-12-20', '2024-12-27', '2024-12-26', 'Completed', 'SUP010');
-INSERT INTO Ordered VALUES ('PO-TVMIO01', 'TV-MIO-P1');
-INSERT INTO Purchase_Order VALUES ('PO-TVTOS01', '2024-12-25', '2025-01-01', '2024-12-31', 'Completed', 'SUP014');
-INSERT INTO Ordered VALUES ('PO-TVTOS01', 'TV-TOS-C350');
-INSERT INTO Purchase_Order VALUES ('PO-TABMAP1', '2025-01-05', '2025-01-12', '2025-01-11', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-TABMAP1', 'TAB-MAP-IPAD9');
-INSERT INTO Purchase_Order VALUES ('PO-TABSAM1', '2025-01-10', '2025-01-17', '2025-01-16', 'Completed', 'SUP001');
-INSERT INTO Ordered VALUES ('PO-TABSAM1', 'TAB-SAM-TABA8');
-INSERT INTO Purchase_Order VALUES ('PO-TABMIO1', '2025-01-15', '2025-01-22', '2025-01-21', 'Completed', 'SUP010');
-INSERT INTO Ordered VALUES ('PO-TABMIO1', 'TAB-MIO-PAD6');
-INSERT INTO Purchase_Order VALUES ('PO-HPHSON1', '2025-02-05', '2025-02-12', '2025-02-11', 'Completed', 'SUP011');
-INSERT INTO Ordered VALUES ('PO-HPHSON1', 'HPH-SNQ-WH1000');
-INSERT INTO Purchase_Order VALUES ('PO-HPHJBZ1', '2025-02-10', '2025-02-17', '2025-02-16', 'Completed', 'SUP015');
-INSERT INTO Ordered VALUES ('PO-HPHJBZ1', 'HPH-JBZ-T660');
-INSERT INTO Purchase_Order VALUES ('PO-HPHBTZ1', '2025-02-15', '2025-02-22', '2025-02-21', 'Completed', 'SUP016');
-INSERT INTO Ordered VALUES ('PO-HPHBTZ1', 'HPH-BTZ-ROKER');
-INSERT INTO Purchase_Order VALUES ('PO-HPHNOZ1', '2025-02-20', '2025-02-27', '2025-02-26', 'Completed', 'SUP017');
-INSERT INTO Ordered VALUES ('PO-HPHNOZ1', 'HPH-NOZ-CANVAS');
-INSERT INTO Purchase_Order VALUES ('PO-HPHMAP1', '2025-02-25', '2025-03-04', '2025-03-03', 'Completed', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-HPHMAP1', 'HPH-MAP-AIRP3');
-INSERT INTO Purchase_Order VALUES ('PO-MOB1MX5', '2025-04-10', '2025-04-17', NULL, 'Pending', 'SUP003');
-INSERT INTO Ordered VALUES ('PO-MOB1MX5', 'MOB-1MX-11R');
-INSERT INTO Purchase_Order VALUES ('PO-LAPDAL3', '2025-04-13', '2025-04-20', NULL, 'Pending', 'SUP007');
-INSERT INTO Ordered VALUES ('PO-LAPDAL3', 'LAP-DAL-INSP15');
-INSERT INTO Purchase_Order VALUES ('PO-MOBMAP7', '2025-04-09', '2025-04-12', NULL, 'Pending', 'SUP002');
-INSERT INTO Ordered VALUES ('PO-MOBMAP7', 'MOB-MAP-MP15');
+-- Purchase_Order and Ordered
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBMAP1', '2024-10-15', '2024-10-22', '2024-10-21', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBMAP1', 'MOB-MAP-MP15');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBMAP2', '2024-11-10', '2024-11-17', '2024-10-17', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBMAP2', 'MOB-MAP-MP14');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBMAP3', '2023-10-15', '2023-10-22', '2023-10-21', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBMAP3', 'MOB-MAP-MPSE');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBMAP4', '2025-01-10', '2025-01-17', '2025-01-16', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBMAP4', 'MOB-MAP-MP15');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBMAP5', '2025-02-08', '2025-02-15', '2025-01-16', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBMAP5', 'MOB-MAP-MP14');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBMAP6', '2025-03-01', '2025-03-08', '2025-03-10', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBMAP6', 'MOB-MAP-MPSE');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBSAM1', '2024-11-05', '2024-11-12', '2024-11-11', 'Completed', 'SUP001');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBSAM1', 'MOB-SAM-S23');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBSAM2', '2024-11-05', '2024-11-12', '2024-11-11', 'Completed', 'SUP001');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBSAM2', 'MOB-SAM-A54');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBSAM3', '2025-02-10', '2025-02-17', '2025-02-16', 'Completed', 'SUP001');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBSAM3', 'MOB-SAM-S23');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBSAM4', '2025-02-09', '2025-02-16', '2025-02-18', 'Completed', 'SUP001');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBSAM4', 'MOB-SAM-A54');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOB1MX1', '2024-12-03', '2024-12-10', '2024-12-09', 'Completed', 'SUP003');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOB1MX1', 'MOB-1MX-11R');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOB1MX2', '2024-12-11', '2024-12-18', '2024-12-18', 'Completed', 'SUP003');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOB1MX2', 'MOB-1MX-13S');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOB1MX3', '2025-03-15', '2025-03-22', '2025-03-21', 'Completed', 'SUP003');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOB1MX3', 'MOB-1MX-11R');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOB1MX4', '2025-03-15', '2025-03-22', '2025-03-21', 'Completed', 'SUP003');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOB1MX4', 'MOB-1MX-13S');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBVIV1', '2025-01-08', '2025-01-15', '2025-01-14', 'Completed', 'SUP004');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBVIV1', 'MOB-VIV-V27');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBVIV2', '2025-01-08', '2025-02-15', '2025-02-14', 'Completed', 'SUP004');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBVIV2', 'MOB-VIV-T30');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBVIV3', '2025-04-02', '2025-04-09', '2025-04-09', 'Completed', 'SUP004');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBVIV3', 'MOB-VIV-V27');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBVIV4', '2025-04-05', '2025-04-12', '2025-04-11', 'Completed', 'SUP004');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBVIV4', 'MOB-VIV-T30');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-LAPDAL1', '2024-11-10', '2024-11-17', '2024-11-16', 'Completed', 'SUP007');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-LAPDAL1', 'LAP-DAL-XPS13');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-LAPHP01', '2024-11-15', '2024-11-22', '2024-11-21', 'Completed', 'SUP008');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-LAPHP01', 'LAP-HP-15DW100');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-LAPMAP1', '2024-11-20', '2024-11-27', '2024-11-26', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-LAPMAP1', 'LAP-MAP-MBAM2');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-LAPLNV1', '2024-11-25', '2024-12-02', '2024-12-01', 'Completed', 'SUP009');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-LAPLNV1', 'LAP-LNV-IDEAP3');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TVSAM01', '2024-12-05', '2024-12-12', '2024-12-11', 'Completed', 'SUP001');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TVSAM01', 'TV-SAM-QN90C');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TVSNQ01', '2024-12-10', '2024-12-17', '2024-12-16', 'Completed', 'SUP011');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TVSNQ01', 'TV-SNQ-X80K');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TVLJ001', '2024-12-15', '2024-12-22', '2024-12-21', 'Completed', 'SUP012');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TVLJ001', 'TV-LJ-C2');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TVMIO01', '2024-12-20', '2024-12-27', '2024-12-26', 'Completed', 'SUP010');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TVMIO01', 'TV-MIO-P1');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TVTOS01', '2024-12-25', '2025-01-01', '2024-12-31', 'Completed', 'SUP014');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TVTOS01', 'TV-TOS-C350');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TABMAP1', '2025-01-05', '2025-01-12', '2025-01-11', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TABMAP1', 'TAB-MAP-IPAD9');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TABSAM1', '2025-01-10', '2025-01-17', '2025-01-16', 'Completed', 'SUP001');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TABSAM1', 'TAB-SAM-TABA8');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-TABMIO1', '2025-01-15', '2025-01-22', '2025-01-21', 'Completed', 'SUP010');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-TABMIO1', 'TAB-MIO-PAD6');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-HPHSON1', '2025-02-05', '2025-02-12', '2025-02-11', 'Completed', 'SUP011');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-HPHSON1', 'HPH-SNQ-WH1000');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-HPHJBZ1', '2025-02-10', '2025-02-17', '2025-02-16', 'Completed', 'SUP015');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-HPHJBZ1', 'HPH-JBZ-T660');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-HPHBTZ1', '2025-02-15', '2025-02-22', '2025-02-21', 'Completed', 'SUP016');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-HPHBTZ1', 'HPH-BTZ-ROKER');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-HPHNOZ1', '2025-02-20', '2025-02-27', '2025-02-26', 'Completed', 'SUP017');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-HPHNOZ1', 'HPH-NOZ-CANVAS');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-HPHMAP1', '2025-02-25', '2025-03-04', '2025-03-03', 'Completed', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-HPHMAP1', 'HPH-MAP-AIRP3');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOB1MX5', '2025-04-10', '2025-04-17', NULL, 'Pending', 'SUP003');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOB1MX5', 'MOB-1MX-11R');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-LAPDAL3', '2025-04-13', '2025-04-20', NULL, 'Pending', 'SUP007');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-LAPDAL3', 'LAP-DAL-INSP15');
+INSERT INTO Purchase_Order (OrderID, OrderDate, ExpectedDeliveryDate, ActualDeliveryDate, OrderStatus, SupplierID)
+VALUES ('PO-MOBMAP7', '2025-04-09', '2025-04-12', NULL, 'Pending', 'SUP002');
+INSERT INTO Ordered (OrderID, ProductID)
+VALUES ('PO-MOBMAP7', 'MOB-MAP-MP15');
 
---Employee
-INSERT INTO Employee VALUES (101, 'Rahul Sharma', 'Sales Representative', 'rahul_s@broma.com');
-INSERT INTO Employee VALUES (102, 'Priya Patel', 'Store Manager', 'priya_p@broma.com');
-INSERT INTO Employee VALUES (103, 'Vikram Singh', 'Cashier', 'vikram_s@broma.com');
+-- Employee
+INSERT INTO Employee (EmployeeID, E_Name, E_Role, E_Email)
+VALUES (101, 'Rahul Sharma', 'Sales Representative', 'rahul_s@broma.com'),
+       (102, 'Priya Patel', 'Store Manager', 'priya_p@broma.com'),
+       (103, 'Vikram Singh', 'Cashier', 'vikram_s@broma.com');
 
---Sales_Transaction
-INSERT INTO Sales_Transaction VALUES ('T-SAMS23-01', 'INS-MOBSAMS23-0001', 'Credit Card', '2025-02-18', 74900, 74900, 101);
-INSERT INTO Sales_Transaction VALUES ('T-SAMS23-02', 'INS-MOBSAMS23-0001', 'UPI', '2025-02-20', 74900, 74900, 102);
-INSERT INTO Sales_Transaction VALUES ('T-SAMS23-03', 'INS-MOBSAMS23-0001', 'Debit Card', '2025-03-05', 74900, 74900, 103);
-INSERT INTO Sales_Transaction VALUES ('T-1MX11R-01', 'INS-MOB1MX11R-0001', 'EMI', '2025-03-20', 41900, 15000, 101); 
-INSERT INTO Sales_Transaction VALUES ('T-VIVV27-01', 'INS-MOBVIVV27-0001', 'Debit Card', '2025-04-05', 34900, 34900, 102);
-INSERT INTO Sales_Transaction VALUES ('T-VIVT30-01', 'INS-MOBVIVT30-0001', 'Cash', '2025-04-10', 30500, 30500, 103);
-INSERT INTO Sales_Transaction VALUES ('T-MAPMP15-01', 'INS-MOBMAPMP15-0001', 'Credit Card', '2025-01-15', 79900, 79900, 101);
-INSERT INTO Sales_Transaction VALUES ('T-MAPMP14-01', 'INS-MOBMAPMP14-0001', 'UPI', '2025-02-10', 69900, 69900, 102);
-INSERT INTO Sales_Transaction VALUES ('T-DALXPS-01', 'INS-LAPDALXPS-0001', 'Credit Card', '2024-12-01', 99900, 99900, 101);
-INSERT INTO Sales_Transaction VALUES ('T-HP15DW-01', 'INS-LAPHP15DW-0001', 'Debit Card', '2024-12-15', 62900, 62900, 102);
-INSERT INTO Sales_Transaction VALUES ('T-SAMQN9-01', 'INS-TVSAMQN9-0001', 'Credit Card', '2025-01-05', 149900, 149900, 103);
-INSERT INTO Sales_Transaction VALUES ('T-SNQX80-01', 'INS-TVSNQX80-0001', 'UPI', '2025-01-10', 89900, 89900, 101);
-INSERT INTO Sales_Transaction VALUES ('T-MAPIP9-01', 'INS-TABMAPMP-0001', 'Debit Card', '2025-02-05', 34900, 34900, 102);
-INSERT INTO Sales_Transaction VALUES ('T-SAMTA8-01', 'INS-TABSAMTA-0001', 'Cash', '2025-02-12', 22900, 22900, 103);
-INSERT INTO Sales_Transaction VALUES ('T-SNQWH-01', 'INS-HPHSONWH-0001', 'Credit Card', '2025-03-01', 29900, 29900, 101);
-INSERT INTO Sales_Transaction VALUES ('T-JBZT6-01', 'INS-HPHJBZT6-0001', 'UPI', '2025-03-10', 7990, 7990, 102);
+-- Sales_Transaction
+INSERT INTO Sales_Transaction (TranstID, InstanceID, PaymentMethod, TranstDate, TotalAmount, AmountPaid, EmployeeID)
+VALUES ('T-SAMS23-01', 'INS-MOBSAMS23-0001', 'Credit Card', '2025-02-18', 74900, 74900, 101),
+       ('T-SAMS23-02', 'INS-MOBSAMS23-0001', 'UPI', '2025-02-20', 74900, 74900, 102),
+       ('T-SAMS23-03', 'INS-MOBSAMS23-0001', 'Debit Card', '2025-03-05', 74900, 74900, 103),
+       ('T-1MX11R-01', 'INS-MOB1MX11R-0001', 'EMI', '2025-03-20', 41900, 15000, 101),
+       ('T-VIVV27-01', 'INS-MOBVIVV27-0001', 'Debit Card', '2025-04-05', 34900, 34900, 102),
+       ('T-VIVT30-01', 'INS-MOBVIVT30-0001', 'Cash', '2025-04-10', 30500, 30500, 103),
+       ('T-MAPMP15-01', 'INS-MOBMAPMP15-0001', 'Credit Card', '2025-01-15', 79900, 79900, 101),
+       ('T-MAPMP14-01', 'INS-MOBMAPMP14-0001', 'UPI', '2025-02-10', 69900, 69900, 102),
+       ('T-DALXPS-01', 'INS-LAPDALXPS-0001', 'Credit Card', '2024-12-01', 99900, 99900, 101),
+       ('T-HP15DW-01', 'INS-LAPHP15DW-0001', 'Debit Card', '2024-12-15', 62900, 62900, 102),
+       ('T-SAMQN9-01', 'INS-TVSAMQN9-0001', 'Credit Card', '2025-01-05', 149900, 149900, 103),
+       ('T-SNQX80-01', 'INS-TVSNQX80-0001', 'UPI', '2025-01-10', 89900, 89900, 101),
+       ('T-MAPIP9-01', 'INS-TABMAPMP-0001', 'Debit Card', '2025-02-05', 34900, 34900, 102),
+       ('T-SAMTA8-01', 'INS-TABSAMTA-0001', 'Cash', '2025-02-12', 22900, 22900, 103),
+       ('T-SNQWH-01', 'INS-HPHSONWH-0001', 'Credit Card', '2025-03-01', 29900, 29900, 101),
+       ('T-JBZT6-01', 'INS-HPHJBZT6-0001', 'UPI', '2025-03-10', 7990, 7990, 102);
 
 -- ReturnedProducts
-INSERT INTO ReturnedProducts VALUES ('RET-001', 'INS-MOBSAMS23-0001', '2025-03-01', 'Damaged', 'Damaged', 'T-SAMS23-01');
-INSERT INTO ReturnedProducts VALUES ('RET-002', 'INS-MOBSAMA54-0001', '2025-03-05', 'Faulty', 'Available', 'T-SAMS23-02');
-INSERT INTO ReturnedProducts VALUES ('RET-003', 'INS-MOBSAMA54-0003', '2025-03-10', 'WrongItem', 'NowSold', 'T-SAMS23-03');
-INSERT INTO ReturnedProducts VALUES ('RET-004', 'INS-MOB1MX11R-0001', '2025-04-01', 'Damaged', 'Damaged', 'T-1MX11R-01');
-INSERT INTO ReturnedProducts VALUES ('RET-005', 'INS-LAPDALXPS-0001', '2024-12-20', 'Faulty', 'Available', 'T-DALXPS-01');
+INSERT INTO ReturnedProducts (ReturnID, InstanceID, ReturnDate, Reason, Status, TranstID)
+VALUES ('RET-001', 'INS-MOBSAMS23-0001', '2025-03-01', 'Damaged', 'Damaged', 'T-SAMS23-01'),
+       ('RET-002', 'INS-MOBSAMA54-0001', '2025-03-05', 'Faulty', 'Available', 'T-SAMS23-02'),
+       ('RET-003', 'INS-MOBSAMA54-0003', '2025-03-10', 'WrongItem', 'NowSold', 'T-SAMS23-03'),
+       ('RET-004', 'INS-MOB1MX11R-0001', '2025-04-01', 'Damaged', 'Damaged', 'T-1MX11R-01'),
+       ('RET-005', 'INS-LAPDALXPS-0001', '2024-12-20', 'Faulty', 'Available', 'T-DALXPS-01');
 
---Damaged_Products
-INSERT INTO Damaged_Products VALUES ('DAM-001', 'INS-MOBSAMS23-0001', '2025-03-02', 'Screen broken');
-INSERT INTO Damaged_Products VALUES ('DAM-002', 'INS-MOBSAMA54-0001', '2025-03-06', 'Battery issue');
-INSERT INTO Damaged_Products VALUES ('DAM-003', 'INS-MOB1MX11R-0001', '2025-04-02', 'Water damage');
+-- Damaged_Products
+INSERT INTO Damaged_Products (DamageID, InstanceID, DamageDate, DamageDescription)
+VALUES ('DAM-001', 'INS-MOBSAMS23-0001', '2025-03-02', 'Screen broken'),
+       ('DAM-002', 'INS-MOBSAMA54-0001', '2025-03-06', 'Battery issue'),
+       ('DAM-003', 'INS-MOB1MX11R-0001', '2025-04-02', 'Water damage');
 
 -- Promotions
-INSERT INTO Promotions VALUES ('PROMO001', '2025-04-01', '2025-04-30', 'Debit', 10);  
-INSERT INTO Promotions VALUES ('PROMO002', '2025-05-01', '2025-05-31', 'Credit', 15); 
-INSERT INTO Promotions VALUES ('PROMO003', '2025-06-01', '2025-06-15', 'Sale', 20);  
+INSERT INTO Promotions (PromoID, StartDate, EndDate, PromoType, DiscountPercentage)
+VALUES ('PROMO001', '2025-04-01', '2025-04-30', 'Debit', 10),
+       ('PROMO002', '2025-05-01', '2025-05-31', 'Credit', 15),
+       ('PROMO003', '2025-06-01', '2025-06-15', 'Sale', 20);
 
---Has_Promo
-INSERT INTO Has_Promo VALUES ('PROMO001', 'MOB-SAM-S23');   
-INSERT INTO Has_Promo VALUES ('PROMO003', 'MOB-MAP-MP15'); 
-INSERT INTO Has_Promo VALUES ('PROMO002', 'LAP-DAL-XPS13');
-INSERT INTO Has_Promo VALUES ('PROMO003', 'TV-SAM-QN90C'); 
-INSERT INTO Has_Promo VALUES ('PROMO001', 'TAB-MAP-IPAD9'); 
-INSERT INTO Has_Promo VALUES ('PROMO002', 'HPH-SNQ-WH1000');
+-- Has_Promo
+INSERT INTO Has_Promo (PromoID, ProductID)
+VALUES ('PROMO001', 'MOB-SAM-S23'),
+       ('PROMO003', 'MOB-MAP-MP15'),
+       ('PROMO002', 'LAP-DAL-XPS13'),
+       ('PROMO003', 'TV-SAM-QN90C'),
+       ('PROMO001', 'TAB-MAP-IPAD9'),
+       ('PROMO002', 'HPH-SNQ-WH1000');
 
+-- Add Quantity column to Purchase_Order
 ALTER TABLE Purchase_Order
 ADD COLUMN Quantity SMALLINT NOT NULL DEFAULT 1;
 
---adding quantities
-UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBMAP4'; 
+-- Update quantities
+UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBMAP4';
 UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBMAP5';
-UPDATE Purchase_Order SET Quantity = 8 WHERE OrderID = 'PO-MOBMAP6'; 
-UPDATE Purchase_Order SET Quantity = 18 WHERE OrderID = 'PO-MOBSAM3'; 
+UPDATE Purchase_Order SET Quantity = 8 WHERE OrderID = 'PO-MOBMAP6';
+UPDATE Purchase_Order SET Quantity = 18 WHERE OrderID = 'PO-MOBSAM3';
 UPDATE Purchase_Order SET Quantity = 20 WHERE OrderID = 'PO-MOBSAM4';
-UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOB1MX3'; 
+UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOB1MX3';
 UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOB1MX4';
-UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBVIV3'; 
-UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOBVIV4'; 
-UPDATE Purchase_Order SET Quantity = 10 WHERE OrderID = 'PO-LAPDAL1'; 
-UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-LAPHP01'; 
-UPDATE Purchase_Order SET Quantity = 7 WHERE OrderID = 'PO-LAPMAP1'; 
-UPDATE Purchase_Order SET Quantity = 9 WHERE OrderID = 'PO-LAPLNV1'; 
-UPDATE Purchase_Order SET Quantity = 5 WHERE OrderID = 'PO-TVSAM01'; 
-UPDATE Purchase_Order SET Quantity = 6 WHERE OrderID = 'PO-TVSNQ01'; 
-UPDATE Purchase_Order SET Quantity = 10 WHERE OrderID = 'PO-TVMIO01'; 
-UPDATE Purchase_Order SET Quantity = 8 WHERE OrderID = 'PO-TABMAP1'; 
-UPDATE Purchase_Order SET Quantity = 10 WHERE OrderID = 'PO-TABSAM1'; 
+UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBVIV3';
+UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOBVIV4';
+UPDATE Purchase_Order SET Quantity = 10 WHERE OrderID = 'PO-LAPDAL1';
+UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-LAPHP01';
+UPDATE Purchase_Order SET Quantity = 7 WHERE OrderID = 'PO-LAPMAP1';
+UPDATE Purchase_Order SET Quantity = 9 WHERE OrderID = 'PO-LAPLNV1';
+UPDATE Purchase_Order SET Quantity = 5 WHERE OrderID = 'PO-TVSAM01';
+UPDATE Purchase_Order SET Quantity = 6 WHERE OrderID = 'PO-TVSNQ01';
+UPDATE Purchase_Order SET Quantity = 10 WHERE OrderID = 'PO-TVMIO01';
+UPDATE Purchase_Order SET Quantity = 8 WHERE OrderID = 'PO-TABMAP1';
+UPDATE Purchase_Order SET Quantity = 10 WHERE OrderID = 'PO-TABSAM1';
 UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-HPHSON1';
-UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOBMAP1'; 
-UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBMAP2'; 
+UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOBMAP1';
+UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBMAP2';
 UPDATE Purchase_Order SET Quantity = 8 WHERE OrderID = 'PO-MOBMAP3';
-UPDATE Purchase_Order SET Quantity = 18 WHERE OrderID = 'PO-MOBSAM1'; 
-UPDATE Purchase_Order SET Quantity = 20 WHERE OrderID = 'PO-MOBSAM2'; 
-UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOB1MX1'; 
+UPDATE Purchase_Order SET Quantity = 18 WHERE OrderID = 'PO-MOBSAM1';
+UPDATE Purchase_Order SET Quantity = 20 WHERE OrderID = 'PO-MOBSAM2';
+UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOB1MX1';
 UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOB1MX2';
-UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBVIV1'; 
-UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOBVIV2'; 
-UPDATE Purchase_Order SET Quantity = 4 WHERE OrderID = 'PO-TVLJ001'; 
-UPDATE Purchase_Order SET Quantity = 6 WHERE OrderID = 'PO-TVTOS01'; 
-UPDATE Purchase_Order SET Quantity = 7 WHERE OrderID = 'PO-TABMIO1'; 
-UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-HPHJBZ1'; 
-UPDATE Purchase_Order SET Quantity = 20 WHERE OrderID = 'PO-HPHBTZ1'; 
-UPDATE Purchase_Order SET Quantity = 18 WHERE OrderID = 'PO-HPHNOZ1'; 
-UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-HPHMAP1'; 
-UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOB1MX5'; 
+UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOBVIV1';
+UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-MOBVIV2';
+UPDATE Purchase_Order SET Quantity = 4 WHERE OrderID = 'PO-TVLJ001';
+UPDATE Purchase_Order SET Quantity = 6 WHERE OrderID = 'PO-TVTOS01';
+UPDATE Purchase_Order SET Quantity = 7 WHERE OrderID = 'PO-TABMIO1';
+UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-HPHJBZ1';
+UPDATE Purchase_Order SET Quantity = 20 WHERE OrderID = 'PO-HPHBTZ1';
+UPDATE Purchase_Order SET Quantity = 18 WHERE OrderID = 'PO-HPHNOZ1';
+UPDATE Purchase_Order SET Quantity = 15 WHERE OrderID = 'PO-HPHMAP1';
+UPDATE Purchase_Order SET Quantity = 12 WHERE OrderID = 'PO-MOB1MX5';
 UPDATE Purchase_Order SET Quantity = 8 WHERE OrderID = 'PO-LAPDAL3';
 
-ALTER TABLE ReturnedProducts ADD COLUMN refund_amount int;
+-- Add refund_amount column to ReturnedProducts
+ALTER TABLE ReturnedProducts
+ADD COLUMN refund_amount INT;
 
-UPDATE ReturnedProducts SET refund_amount = 71155 WHERE ReturnID = 'RET-001'; 
-UPDATE ReturnedProducts SET refund_amount = 31255 WHERE ReturnID = 'RET-002'; 
+-- Update refund_amount
+UPDATE ReturnedProducts SET refund_amount = 71155 WHERE ReturnID = 'RET-001';
+UPDATE ReturnedProducts SET refund_amount = 31255 WHERE ReturnID = 'RET-002';
 UPDATE ReturnedProducts SET refund_amount = 32900 WHERE ReturnID = 'RET-003';
 UPDATE ReturnedProducts SET refund_amount = 37905 WHERE ReturnID = 'RET-004';
 UPDATE ReturnedProducts SET refund_amount = 96903 WHERE ReturnID = 'RET-005';
 
---Modifying ON DELETE RESTRICT and NOT NULL constraints to make sure a few of the queries work and after those queries are implemented, the constraints can be added again
-ALTER TABLE Product DROP CONSTRAINT product_supplierid_fkey;
-ALTER TABLE Product ADD CONSTRAINT product_supplierid_fkey 
-    FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
-    ON UPDATE CASCADE ON DELETE CASCADE;
+-- Modify constraints
+ALTER TABLE Product
+DROP FOREIGN KEY product_supplierid_fkey;
 
-ALTER TABLE Ordered DROP CONSTRAINT ordered_orderid_fkey;
-ALTER TABLE Ordered ADD CONSTRAINT ordered_orderid_fkey 
-    FOREIGN KEY (OrderID) REFERENCES Purchase_Order(OrderID)
-    ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE Product
+ADD CONSTRAINT product_supplierid_fkey 
+FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
+ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE Ordered DROP CONSTRAINT ordered_productid_fkey;
-ALTER TABLE Ordered ADD CONSTRAINT ordered_productid_fkey 
-    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
-    ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE Ordered
+DROP FOREIGN KEY ordered_orderid_fkey;
 
-ALTER TABLE ProductInstance DROP CONSTRAINT productinstance_productid_fkey;
-ALTER TABLE ProductInstance ADD CONSTRAINT productinstance_productid_fkey 
-    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
-    ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE Ordered
+ADD CONSTRAINT ordered_orderid_fkey 
+FOREIGN KEY (OrderID) REFERENCES Purchase_Order(OrderID)
+ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE Sales_Transaction DROP CONSTRAINT sales_transaction_instanceid_fkey;
-ALTER TABLE Sales_Transaction ADD CONSTRAINT sales_transaction_instanceid_fkey 
-    FOREIGN KEY (InstanceID) REFERENCES ProductInstance(InstanceID)
-    ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE Ordered
+DROP FOREIGN KEY ordered_productid_fkey;
 
-ALTER TABLE Product ALTER COLUMN SupplierID DROP NOT NULL;
+ALTER TABLE Ordered
+ADD CONSTRAINT ordered_productid_fkey 
+FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE ProductInstance ALTER COLUMN ProductID DROP NOT NULL;
+ALTER TABLE ProductInstance
+DROP FOREIGN KEY productinstance_productid_fkey;
 
-ALTER TABLE Sales_Transaction ALTER COLUMN InstanceID DROP NOT NULL;
+ALTER TABLE ProductInstance
+ADD CONSTRAINT productinstance_productid_fkey 
+FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE ReturnedProducts ALTER COLUMN InstanceID DROP NOT NULL;
+ALTER TABLE Sales_Transaction
+DROP FOREIGN KEY sales_transaction_instanceid_fkey;
 
-ALTER TABLE ReturnedProducts ALTER COLUMN TranstID DROP NOT NULL;
+ALTER TABLE Sales_Transaction
+ADD CONSTRAINT sales_transaction_instanceid_fkey 
+FOREIGN KEY (InstanceID) REFERENCES ProductInstance(InstanceID)
+ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE Damaged_Products ALTER COLUMN InstanceID DROP NOT NULL;
+ALTER TABLE Product
+MODIFY COLUMN SupplierID VARCHAR(10) NULL;
 
-ALTER TABLE Ordered ALTER COLUMN ProductID DROP NOT NULL;
+ALTER TABLE ProductInstance
+MODIFY COLUMN ProductID VARCHAR(15) NULL;
 
-ALTER TABLE Purchase_Order COLUMN OrderID DROP NOT NULL;
+ALTER TABLE Sales_Transaction
+MODIFY COLUMN InstanceID VARCHAR(20) NULL;
 
-ALTER TABLE Product COLUMN SupplierID DROP NOT NULL ;
+ALTER TABLE ReturnedProducts
+MODIFY COLUMN InstanceID VARCHAR(20) NULL;
 
---so on if any remaining or needed
+ALTER TABLE ReturnedProducts
+MODIFY COLUMN TranstID VARCHAR(15) NULL;
+
+ALTER TABLE Damaged_Products
+MODIFY COLUMN InstanceID VARCHAR(20) NULL;
+
+ALTER TABLE Ordered
+MODIFY COLUMN ProductID VARCHAR(15) NULL;
+
+ALTER TABLE Purchase_Order
+MODIFY COLUMN OrderID VARCHAR(15) NULL;
+
+ALTER TABLE Product
+MODIFY COLUMN SupplierID VARCHAR(10) NULL;
