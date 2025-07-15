@@ -1,0 +1,273 @@
+﻿SQL Queries
+
+1. Retrieve a specific product/supplier/purchase_order/ returnedproducts/promotion/sales_transaction/damaged_products/storage_location
+SELECT * FROM Product WHERE ProductID = 'MOB-MAP-MP15';  
+-- changes in the query can be made according to what is required
+
+2. List Products from a Specific Supplier
+SELECT P.ProductID, P.PName, P.Category, P.SellingPrice, P.StockLevel 
+FROM Product P
+JOIN Supplier S ON P.SupplierID = S.SupplierID
+WHERE S.Sname = 'Maple';  
+
+3. Generate sales summary for a particular date
+SELECT SDate, SUM(Product_Amount) AS TotalSalesAmount 
+FROM Sales_Transaction
+WHERE SDate = '2025-02-10'
+GROUP BY SDate;
+
+4. Calculate overall inventory value
+CREATE VIEW Inventory_Value AS
+SELECT SUM(StockLevel * CostPrice) AS TotalInventoryValue 
+FROM Product;
+-- To view the result: 
+SELECT * FROM Inventory_Value;
+
+5. Fetch Supplier Orders in a Timeframe
+SELECT * FROM Purchase_Order 
+WHERE SupplierID = 'SUP001'  
+AND OrderDate BETWEEN '2025-01-01' AND '2025-03-31';
+ 
+6. Find the Top Three Best-Selling Products and their suppliers (Last 3 Months)
+SELECT P.ProductID, P.PName, P.SupplierID COUNT(*) AS UnitsSold
+FROM Sales_Transaction ST
+NATURAL JOIN ProductInstance PI
+NATURAL JOIN Product P 
+WHERE SDate >= CURRENT_DATE - INTERVAL '3 MONTH'
+--AND P.Category = ‘Mobile’ --if specifying category needed
+GROUP BY P.ProductID, P.PName
+ORDER BY UnitsSold DESC
+LIMIT 3;
+
+7. Adjust inventory after a sale is made
+--For simplicity, it is assumed that only one product can be bought per sales_transaction and only one product can be returned under one ReturnID
+CREATE OR REPLACE FUNCTION update_product_stock()
+RETURNS TRIGGER AS $$
+DECLARE
+    current_stock INTEGER;
+BEGIN
+    SELECT StockLevel INTO current_stock
+    FROM Product
+    WHERE ProductID = (
+        SELECT ProductID 
+        FROM ProductInstance 
+        WHERE InstanceID = NEW.InstanceID
+    );
+    IF current_stock <= 0 THEN
+        RAISE EXCEPTION 'Cannot sell product % - out of stock', NEW.InstanceID;
+    END IF;
+    
+    UPDATE Product
+    SET StockLevel = StockLevel - 1
+    WHERE ProductID = (
+        SELECT ProductID 
+        FROM ProductInstance 
+        WHERE InstanceID = NEW.InstanceID
+    );
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER after_sale_stock_update
+AFTER INSERT ON Sales_Transaction
+FOR EACH ROW
+EXECUTE PROCEDURE update_product_stock();
+
+8. Adjust the inventory after a product is returned
+CREATE OR REPLACE FUNCTION returned_product_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Product
+    SET StockLevel = StockLevel + 1
+    WHERE ProductID = (
+        SELECT ProductID 
+        FROM ProductInstance 
+        WHERE InstanceID = NEW.InstanceID
+    );
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER after_return_stock_update
+AFTER INSERT ON ReturnedProducts
+FOR EACH ROW
+EXECUTE PROCEDURE returned_product_stock();
+
+9. Adjust the inventory after a purchase order is delivered
+CREATE OR REPLACE FUNCTION update_product_stock_on_delivery()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.Status = 'Completed' AND OLD.Status IS DISTINCT FROM 'Completed' THEN
+        UPDATE Product
+        SET StockLevel = StockLevel + (
+            SELECT Quantity
+            FROM Purchase_Order
+            WHERE OrderID = NEW.OrderID
+        )
+        WHERE ProductID IN (
+            SELECT ProductID
+            FROM Ordered
+            WHERE OrderID = NEW.OrderID
+        );
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER after_delivery_of_purchase_order
+AFTER UPDATE ON Purchase_Order
+FOR EACH ROW
+EXECUTE PROCEDURE update_product_stock_on_delivery();
+
+10. If a returned product is sold, mark its status (or change its status from ‘Available’ to) ‘NowSold’
+CREATE OR REPLACE FUNCTION mark_returned_product_sold()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM ReturnedProducts
+        WHERE InstanceID = NEW.InstanceID
+    ) THEN
+        UPDATE ReturnedProducts
+        SET Status = 'NowSold'
+        WHERE InstanceID = NEW.InstanceID;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER after_sale_of_returned
+AFTER INSERT ON Sales_Transaction
+FOR EACH ROW
+EXECUTE PROCEDURE mark_returned_product_sold();
+
+11. Check which products’ quantities are less than or equal to reorder threshold, display their supplier details and check if there are any pending orders for that product and if not then when that product was ordered last.
+--this view should be executed after executing the stored procedure in 15th query
+CREATE OR REPLACE VIEW products_needing_reorder AS
+SELECT p.ProductID, p.PName, p.Category, p.StockLevel, p.Threshold, s.Sname, s.ContactNo, s.Email,
+ (SELECT MAX(po.OrderDate)
+     FROM Purchase_Order po
+     NATURAL JOIN Ordered o 
+     WHERE o.ProductID = p.ProductID 
+     AND po.Status = 'Completed') AS LastOrderDate
+FROM Product p
+NATURAL JOIN Supplier s
+WHERE p.StockLevel <= p.Threshold AND p.IsActive = TRUE
+ORDER BY 
+    (p.Threshold - p.StockLevel) DESC,  
+    p.Category;
+
+12. Show purchase orders which are pending past their expected delivery date
+CREATE OR REPLACE VIEW orders_pending_past_expected_del_date AS
+SELECT po.OrderID, po.OrderDate, po.ExpectedDelDt, po.SupplierID, s.ContactNo, s.Email
+FROM Purchase_Order po 
+NATURAL JOIN Supplier s
+WHERE po.Status = 'Pending' AND CURRENT_DATE > po.ExpectedDelDt
+ORDER BY po.ExpectedDelDt ;
+
+13. Give 3 suppliers whose products were returned the most in the last 5 months because of damage or fault:
+SELECT p.SupplierID, COUNT(p.SupplierID) AS Return_Count
+FROM ReturnedProducts r
+NATURAL JOIN ProductInstance pi
+NATURAL JOIN Product p
+WHERE r.ReturnDate >= CURRENT_DATE - INTERVAL '5 MONTH' AND r.Reason = 'Damaged' OR r.Reason = 'Faulty'
+GROUP BY p.SupplierID 
+ORDER BY Return_Count DESC
+LIMIT 3 ;
+
+14. Give 3 suppliers whose products were reported damaged the most in the last 5 months:
+SELECT p.SupplierID, COUNT(p.SupplierID) AS Damage_Count
+FROM Damaged_Products d
+NATURAL JOIN ProductInstance pi
+NATURAL JOIN Product p
+WHERE d.ReportDate >= CURRENT_DATE - INTERVAL '5 MONTH' 
+GROUP BY p.SupplierID 
+ORDER BY Damage_Count DESC
+LIMIT 3 ;
+
+15. Discontinue the products whose stock_level took 10 months to reach reorder threshold
+--Logic:
+--stock_level <= reorder threshold and
+--date of most recent sales transaction -
+--date of 1st sales transaction after the most recent completed --purchase order >= 12 months 
+--then
+--product.Isactive = false
+CREATE OR REPLACE FUNCTION mark_slow_moving_products_inactive()
+RETURNS VOID AS $$
+BEGIN
+    UPDATE Product
+    SET IsActive = FALSE
+    WHERE StockLevel <= Threshold
+    AND EXISTS (
+        SELECT 1
+        FROM (
+            SELECT
+                p.ProductID,
+                MAX(st.SDate) AS last_sale,
+                (
+                    SELECT MIN(st2.SDate)
+                    FROM Sales_Transaction st2
+                    JOIN ProductInstance pi2 ON st2.InstanceID = pi2.InstanceID
+                    WHERE pi2.ProductID = p.ProductID
+                    AND st2.SDate > (
+                        SELECT MAX(po.ReceiveDate)
+                        FROM Purchase_Order po
+                        JOIN Ordered o ON po.OrderID = o.OrderID
+                        WHERE po.Status = 'Completed'
+                        AND o.ProductID = p.ProductID
+                    )
+                ) AS first_sale_after_last_order
+            FROM Product p
+            JOIN ProductInstance pi ON p.ProductID = pi.ProductID
+            JOIN Sales_Transaction st ON st.InstanceID = pi.InstanceID
+            GROUP BY p.ProductID
+        ) AS sales_data
+        WHERE Product.ProductID = sales_data.ProductID
+        AND AGE(sales_data.last_sale, sales_data.first_sale_after_last_order) >= INTERVAL '10 months'
+    );
+END;
+$$ LANGUAGE plpgsql;
+--To execute:
+Select mark_slow_moving_products_inactive() ;
+
+
+--Following query should only be implemented on long intervals when needed since constraints need to be dropped and added before implementing these kind of queries
+16. Delete discontinued products whose stock level is now 0 or it has been 12 months since it was put in the store (i.e. since its most recent purchase order)
+--logic: if isactive = false and 
+--if its stock level is 0 or if its latest sale was 12 months or more after --its latest completed purchase order 
+--then delete that product
+CREATE OR REPLACE FUNCTION delete_discontinued_products()
+RETURNS VOID AS $$
+BEGIN
+    DELETE FROM Product
+    WHERE IsActive = FALSE
+    AND (
+        StockLevel = 0
+        OR EXISTS (
+            SELECT 1
+            FROM (
+                SELECT
+                    p.ProductID,
+                    MAX(st.SDate) AS last_sale,
+                    (
+                        SELECT MAX(po.ReceiveDate)
+                        FROM Purchase_Order po
+                        JOIN Ordered o ON po.OrderID = o.OrderID
+                        WHERE po.Status = 'Completed'
+                        AND o.ProductID = p.ProductID
+                    ) AS last_purchase
+                FROM Product p
+                JOIN ProductInstance pi ON p.ProductID = pi.ProductID
+                JOIN Sales_Transaction st ON st.InstanceID = pi.InstanceID
+                GROUP BY p.ProductID
+            ) AS product_data
+            WHERE Product.ProductID = product_data.ProductID
+            AND AGE(product_data.last_sale, product_data.last_purchase) >= INTERVAL '12 months'
+        )
+    );
+END;
+$$ LANGUAGE plpgsql;
+DELETE FROM ProductInstance WHERE ProductID = 'XYZ';
+DELETE FROM Ordered WHERE ProductID = 'XYZ';
+DELETE FROM Has_Promo WHERE ProductID = 'XYZ';
+DELETE FROM Sales_Transaction WHERE ProductID = 'XYZ';
+DELETE FROM ReturnedProducts WHERE ProductID = ‘XYZ’;
+DELETE FROM Damaged_Products WHERE ProductID = 'XYZ';
+--further wherever needed, the tuples with InstanceID = NULL, OrderID = NULL, etc. can be deleted.

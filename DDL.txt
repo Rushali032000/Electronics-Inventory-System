@@ -1,0 +1,132 @@
+﻿CREATE SCHEMA IMS_Broma;
+Set search_path to IMS_Broma ;
+CREATE TABLE Supplier (
+    SupplierID VARCHAR(10) PRIMARY KEY,
+    Sname VARCHAR(10) UNIQUE NOT NULL,
+    ContactNo VARCHAR(13) UNIQUE NOT NULL,
+    Email VARCHAR(20) UNIQUE NOT NULL,
+    S_City VARCHAR(10) NOT NULL,
+    S_State VARCHAR(10) NOT NULL,
+    S_Pincode INT NOT NULL,
+    IsActive BOOLEAN DEFAULT TRUE
+);
+
+
+CREATE TABLE Product (
+    ProductID VARCHAR(20) PRIMARY KEY,
+    PName VARCHAR(30) UNIQUE NOT NULL,
+    Category VARCHAR(10) NOT NULL,
+    CostPrice INT NOT NULL,
+    SellingPrice INT NOT NULL,
+    StockLevel SMALLINT NOT NULL,
+    Threshold SMALLINT NOT NULL,
+    IsActive BOOLEAN DEFAULT TRUE,
+    SupplierID VARCHAR(10) NOT NULL, 
+    FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
+        ON DELETE RESTRICT
+);
+
+
+CREATE TABLE Purchase_Order (
+    OrderID VARCHAR(10) PRIMARY KEY,
+    OrderDate DATE NOT NULL,
+    ExpectedDelDt DATE NOT NULL,
+    ReceiveDate DATE,
+    Status VARCHAR(10) NOT NULL,
+    SupplierID VARCHAR(10) NOT NULL,
+    FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
+);
+
+
+CREATE TABLE Ordered (
+    OrderID VARCHAR(10) UNIQUE NOT NULL,
+    ProductID VARCHAR(20)NOT NULL,
+    PRIMARY KEY (OrderID, ProductID),
+    FOREIGN KEY (OrderID) REFERENCES Purchase_Order(OrderID)
+        ON DELETE RESTRICT,
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+        ON DELETE RESTRICT
+);
+
+
+CREATE TABLE Storage_Location (
+    LocationID VARCHAR(10) PRIMARY KEY,
+    AisleNo SMALLINT NOT NULL,
+    ShelfNo SMALLINT NOT NULL
+);
+
+
+CREATE TABLE ProductInstance (
+    InstanceID VARCHAR(25) PRIMARY KEY,
+    ProductID VARCHAR(20) NOT NULL,
+    Colour VARCHAR(10) NOT NULL,
+    LocationID VARCHAR(10) NOT NULL,
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID) 
+        ON DELETE RESTRICT,
+    FOREIGN KEY (LocationID) REFERENCES Storage_Location(LocationID)
+        ON UPDATE CASCADE ON DELETE CASCADE
+    --if a location is removed, the products placed over there will immediately be shifted to a different location, thus deleting a location will not affect the knowledge about placement of products previously present in that location since they will be shifted and the data will be added/updated here.
+);
+
+
+CREATE TABLE Promotions (
+    PromoID VARCHAR(10) PRIMARY KEY,
+    StartDate DATE NOT NULL,
+    EndDate DATE,
+    PromoType VARCHAR(7) NOT NULL,
+    DiscountPercent SMALLINT 
+);
+
+
+CREATE TABLE Has_Promo (
+    PromoID VARCHAR(10),
+    ProductID VARCHAR(20),
+    PRIMARY KEY (PromoID, ProductID),
+    FOREIGN KEY (PromoID) REFERENCES Promotions(PromoID)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
+
+CREATE TABLE Employee (
+    EID INT PRIMARY KEY,
+    Ename VARCHAR(20),
+    Role VARCHAR(20),
+    E_Email VARCHAR(20)
+);
+
+
+CREATE TABLE Sales_Transaction (
+    TranstID VARCHAR(10) PRIMARY KEY,
+    InstanceID VARCHAR(25) NOT NULL,
+    PaymentMethod VARCHAR(7) NOT NULL,
+    SDate DATE NOT NULL,
+    Product_Amount INT NOT NULL,
+    Amount_Paid INT NOT NULL,
+    EID INT, --in case an employee leaves, their data is deleted and the EID in the corresponding transaction will be set to null
+    FOREIGN KEY (InstanceID) REFERENCES ProductInstance(InstanceID)
+        ON DELETE RESTRICT,
+    FOREIGN KEY (EID) REFERENCES Employee(EID)
+        ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+
+CREATE TABLE ReturnedProducts (
+    ReturnID VARCHAR(7) PRIMARY KEY,
+    InstanceID VARCHAR(25) NOT NULL,
+    ReturnDate DATE NOT NULL,
+    Reason VARCHAR(10) NOT NULL,
+    Status VARCHAR(10) NOT NULL,
+    TranstID VARCHAR(10) NOT NULL,
+    FOREIGN KEY (InstanceID) REFERENCES ProductInstance(InstanceID),
+    FOREIGN KEY (TranstID) REFERENCES Sales_Transaction(TranstID)
+);
+
+
+CREATE TABLE Damaged_Products (
+    DamageID VARCHAR(10) PRIMARY KEY,
+    InstanceID VARCHAR(25)NOT NULL,
+    ReportDate DATE NOT NULL,
+    Details VARCHAR(20) NOT NULL,
+    FOREIGN KEY (InstanceID) REFERENCES ProductInstance(InstanceID)
+);
